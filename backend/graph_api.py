@@ -34,6 +34,7 @@ def make_app(db_path: str) -> FastAPI:
     app.add_middleware(
         CORSMiddleware,
         allow_origins=[
+            "https://dodge-ai-round-1-assignment.vercel.app",
             "http://127.0.0.1:5173",
             "http://localhost:5173",
             "http://127.0.0.1:5180",
