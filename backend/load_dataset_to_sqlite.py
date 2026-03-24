@@ -537,8 +537,9 @@ def main() -> None:
     )
     parser.add_argument(
         "--db-path",
-        default=str((Path(__file__).resolve().parent.parent / "graph_data.db")),
-        help="Output SQLite database file path.",
+        type=str,
+        default=str((Path(__file__).resolve().parent / "graph_data.db")),
+        help="Path to output SQLite database",
     )
     args = parser.parse_args()
 

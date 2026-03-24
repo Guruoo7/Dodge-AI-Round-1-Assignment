@@ -315,8 +315,9 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run graph API server.")
     parser.add_argument(
         "--db-path",
-        default=str((Path(__file__).resolve().parent.parent / "graph_data.db")),
-        help="Path to SQLite database.",
+        type=str,
+        default=str((Path(__file__).resolve().parent / "graph_data.db")),
+        help="Path to the SQLite database",
     )
     parser.add_argument("--host", default="127.0.0.1", help="Host interface to bind.")
     parser.add_argument("--port", default=8000, type=int, help="Port to bind.")

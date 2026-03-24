@@ -349,8 +349,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build and validate graph from SQLite data.")
     parser.add_argument(
         "--db-path",
-        default=str((Path(__file__).resolve().parent.parent / "graph_data.db")),
-        help="Path to SQLite database.",
+        type=str,
+        default=str((Path(__file__).resolve().parent / "graph_data.db")),
+        help="Path to the input SQLite database",
     )
     parser.add_argument(
         "--report-path",

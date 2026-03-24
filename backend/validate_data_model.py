@@ -286,8 +286,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Validate loaded SQLite data model and generate mapping sheet.")
     parser.add_argument(
         "--db-path",
-        default=str((Path(__file__).resolve().parent.parent / "graph_data.db")),
-        help="Path to SQLite database.",
+        type=str,
+        default=str((Path(__file__).resolve().parent / "graph_data.db")),
+        help="Path to the SQLite database to validate",
     )
     args = parser.parse_args()
 
