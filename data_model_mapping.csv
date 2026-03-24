@@ -1,0 +1,20 @@
+table,primary_key,foreign_keys,business_reference_columns
+sales_order_headers,salesOrder,soldToParty -> business_partners.businessPartner,soldToParty (customer)
+sales_order_items,"salesOrder, salesOrderItem",salesOrder -> sales_order_headers.salesOrder; material -> product_descriptions.product; productionPlant -> plants.plant,"(salesOrder, salesOrderItem) business key referenced by downstream docs"
+sales_order_schedule_lines,"salesOrder, salesOrderItem, scheduleLine","salesOrder -> sales_order_headers.salesOrder; (salesOrder, salesOrderItem) -> sales_order_items(salesOrder, salesOrderItem)",scheduleLine sequence per sales order item
+outbound_delivery_headers,deliveryDocument,shippingPoint -> plants.plant,deliveryDocument used by delivery items and billing item references
+outbound_delivery_items,"deliveryDocument, deliveryDocumentItem",deliveryDocument -> outbound_delivery_headers.deliveryDocument,"(referenceSdDocument, referenceSdDocumentItem) -> sales_order_items(salesOrder, salesOrderItem); material, plant operational references"
+billing_document_headers,billingDocument,soldToParty -> business_partners.businessPartner; cancelledBillingDocument -> billing_document_cancellations.billingDocument,billingDocument links to billing items and journal references
+billing_document_items,"billingDocument, billingDocumentItem",billingDocument -> billing_document_headers.billingDocument,"(referenceSdDocument, referenceSdDocumentItem) -> outbound_delivery_items(deliveryDocument, deliveryDocumentItem); material -> product_descriptions.product"
+journal_entry_items_accounts_receivable,accountingDocument,customer -> customer_company_assignments.customer,referenceDocument -> billing_document_headers.billingDocument
+payments_accounts_receivable,accountingDocument,accountingDocument -> journal_entry_items_accounts_receivable.accountingDocument; customer -> customer_company_assignments.customer,clearingAccountingDocument (business reference to cleared accounting docs)
+business_partners,businessPartner,customer -> customer_company_assignments.customer,master party for sold-to and customer references
+business_partner_addresses,addressId,businessPartner -> business_partners.businessPartner,address master per business partner
+customer_company_assignments,customer,customer -> business_partners.businessPartner,company code assignment for customer
+customer_sales_area_assignments,_surrogate_id,customer -> customer_company_assignments.customer,sales org/distribution channel/division business assignment
+products,product,,material/product master
+product_descriptions,product,product -> products.product,text/description master
+plants,plant,,plant master
+product_plants,"plant, product",plant -> plants.plant; product -> product_descriptions.product,plant-product assignment
+product_storage_locations,"plant, product, storageLocation","(plant, product) -> product_plants(plant, product)",inventory location key
+billing_document_cancellations,billingDocument,billingDocument -> billing_document_headers.billingDocument,cancellation records tied to billing docs
