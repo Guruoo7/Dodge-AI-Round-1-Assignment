@@ -323,6 +323,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--port", default=8000, type=int, help="Port to bind.")
     return parser.parse_args()
 
+DEFAULT_DB_PATH = str((Path(__file__).resolve().parent / "graph_data.db"))
+app = make_app(DEFAULT_DB_PATH)
 
 def main() -> None:
     args = parse_args()
