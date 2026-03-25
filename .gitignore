@@ -39,8 +39,6 @@ dataset/
 
 # 5. Logs & AI Documentation
 # Ignore diagnostic logs generated during AI coding sessions
-AI_Logs/
-Conversation_Log.md
 *.log
 
 # 6. Operating System & IDE Files

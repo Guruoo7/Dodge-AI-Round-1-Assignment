@@ -5,6 +5,34 @@ This project visualizes and queries an SAP Order-to-Cash (O2C) dataset using a h
 
 ---
 
+## 🛠️ Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+- **Node.js (v16+)**: Required to run the Vite React frontend.
+- **Python (3.9+)**: Required to run the FastAPI backend and NetworkX graph engine.
+- **Gemini API Key**: You must have an active Google Gemini API key. This needs to be placed inside a `.env` file in the `backend/` directory (`GEMINI_API_KEY="your_api_key_here"`).
+- **Git**: For version control and deployment.
+
+### 🚀 Running the Application
+
+**1. Start the Backend API:**
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn graph_api:app --reload
+```
+*(The backend will start locally on port 8000)*
+
+**2. Start the Frontend UI:**
+```bash
+cd frontend
+npm install
+npm run dev
+```
+*(The UI will run locally on port 5173)*
+
+---
+
 ## 🏗️ Architecture Decisions
 
 - **Frontend (UI/UX)**: Built with React, Vite, and Cytoscape.js. 
